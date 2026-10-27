@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftTask — Legit Micro-Tasks & Reviews</title>
+<style>
+  :root{
+    --green:#0a7d4f;
+    --green-dark:#075c3a;
+    --ink:#12211a;
+    --muted:#5b6b63;
+    --bg:#f4f8f5;
+    --card:#ffffff;
+    --line:#dbe7df;
+    --warn:#fff6e0;
+    --warn-line:#f0c96b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.6;
+  }
+  header{
+    background:var(--green);color:#fff;padding:14px 20px;
+    display:flex;justify-content:space-between;align-items:center;
+    position:sticky;top:0;z-index:10;
+  }
+  header .logo{font-weight:800;font-size:1.15rem;letter-spacing:.3px}
+  header nav a{color:#e9f7ef;text-decoration:none;margin-left:18px;font-size:.9rem}
+  header nav a:hover{color:#fff;text-decoration:underline}
+
+  .hero{
+    background:linear-gradient(160deg,var(--green),var(--green-dark));
+    color:#fff;padding:60px 20px;text-align:center;
+  }
+  .hero h1{font-size:clamp(1.6rem,4vw,2.6rem);margin-bottom:12px}
+  .hero p{max-width:620px;margin:0 auto 24px;color:#d9f2e5}
+  .btn{
+    display:inline-block;background:#fff;color:var(--green-dark);
+    padding:12px 26px;border-radius:8px;font-weight:700;text-decoration:none;
+    border:none;cursor:pointer;font-size:1rem;
+  }
+  .btn:hover{background:#e9f7ef}
+  .btn-outline{
+    background:transparent;color:#fff;border:2px solid #fff;
+  }
+  .btn-outline:hover{background:rgba(255,255,255,.12)}
+
+  main{max-width:960px;margin:0 auto;padding:40px 20px}
+
+  .notice{
+    background:var(--warn);border:1px solid var(--warn-line);
+    border-radius:10px;padding:16px 18px;margin-bottom:34px;font-size:.92rem;
+  }
+  .notice strong{display:block;margin-bottom:6px}
+
+  h2{font-size:1.4rem;margin:0 0 18px}
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:18px;margin-bottom:40px;
+  }
+  .card{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:20px;
+  }
+  .card .icon{font-size:1.6rem;margin-bottom:8px}
+  .card h3{font-size:1.05rem;margin-bottom:6px}
+  .card .rate{color:var(--green-dark);font-weight:700;margin-bottom:8px}
+  .card p{font-size:.9rem;color:var(--muted)}
+
+  .steps{counter-reset:step;margin-bottom:40px}
+  .steps li{
+    list-style:none;counter-increment:step;position:relative;
+    padding-left:46px;margin-bottom:16px;
+  }
+  .steps li::before{
+    content:counter(step);position:absolute;left:0;top:0;
+    width:30px;height:30px;border-radius:50%;
+    background:var(--green);color:#fff;font-weight:700;
+    display:flex;align-items:center;justify-content:center;font-size:.9rem;
+  }
+  .steps li strong{display:block}
+  .steps li span{font-size:.9rem;color:var(--muted)}
+
+  .signup{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:26px;max-width:460px;margin:0 auto 40px;
+  }
+  .signup h2{text-align:center;margin-bottom:6px}
+  .signup .sub{text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:20px}
+  .signup label{display:block;font-size:.85rem;font-weight:600;margin:12px 0 4px}
+  .signup input{
+    width:100%;padding:11px 12px;border:1px solid var(--line);
+    border-radius:8px;font-size:.95rem;
+  }
+  .signup input:focus{outline:2px solid var(--green);border-color:transparent}
+  .signup .btn{width:100%;margin-top:18px;background:var(--green);color:#fff}
+  .signup .btn:hover{background:var(--green-dark)}
+  .form-msg{font-size:.85rem;margin-top:10px;text-align:center;display:none}
+  .form-msg.ok{color:var(--green-dark);display:block}
+  .form-msg.err{color:#b3261e;display:block}
+
+  .faq{margin-bottom:40px}
+  .faq details{
+    background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:14px 18px;margin-bottom:10px;
+  }
+  .faq summary{cursor:pointer;font-weight:600;font-size:.95rem}
+  .faq p{font-size:.9rem;color:var(--muted);margin-top:8px}
+
+  footer{
+    background:var(--ink);color:#a9bdb2;text-align:center;
+    padding:26px 20px;font-size:.82rem;
+  }
+  footer a{color:#d9f2e5}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">SwiftTask</div>
+  <nav>
+    <a href="#tasks">Tasks</a>
+    <a href="#how">How it works</a>
+    <a href="#signup">Sign up</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Real micro-tasks. Honest pay. No fees.</h1>
+  <p>Complete reviews, surveys and digital product checks. Get paid straight to M-PESA — no activation fee, ever.</p>
+  <a class="btn" href="#signup">Create free account</a>
+  <a class="btn btn-outline" href="#how" style="margin-left:10px">How it works</a>
+</section>
+
+<main>
+
+  <div class="notice">
+    <strong>Our promise</strong>
+    We never charge you to join or to start working. Payout rates are shown upfront. If anyone asks you to pay an "activation fee" using our name, it's not us — report it.
+  </div>
+
+  <section id="tasks">
+    <h2>Available task categories</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>App Reviews</h3>
+        <div class="rate">KES 50–120 per verified review</div>
+        <p>Test an app, leave an honest, genuine review. Paid after moderation.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏨</div>
+        <h3>Hotel &amp; Service Reviews</h3>
+        <div class="rate">KES 80–150 per review</div>
+        <p>Write detailed, truthful reviews of listed venues. Must be a real visit.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📜</div>
+        <h3>Paid Surveys</h3>
+        <div class="rate">KES 30–100 per survey</div>
+        <p>Short market-research surveys. Typical length 5–15 minutes.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Digital Product Testing</h3>
+        <div class="rate">KES 60–200 per task</div>
+        <p>Try templates, tools or ebooks and give structured feedback.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" class="steps">
+    <h2>How it works</h2>
+    <ol>
+      <li><strong>Create a free account</strong><span>No fee, no card. Just your name and phone number.</span></li>
+      <li><strong>Pick a task</strong><span>Every task shows the exact payout before you start.</span></li>
+      <li><strong>Submit your work</strong><span>Reviews and feedback are checked for quality and honesty.</span></li>
+      <li><strong>Get paid to M-PESA</strong><span>Approved tasks are paid out within 3 working days.</span></li>
+    </ol>
+  </section>
+
+  <section id="signup" class="signup">
+    <h2>Create your free account</h2>
+    <p class="sub">No activation fee. Ever.</p>
+    <form id="signupForm" novalidate>
+      <label for="name">Full name</label>
+      <input id="name" name="name" type="text" placeholder="e.g. Claire Wanjiku" required>
+
+      <label for="phone">M-PESA phone number</label>
+      <input id="phone" name="phone" type="tel" placeholder="07XXXXXXXX" required>
+
+      <label for="email">Email (optional)</label>
+      <input id="email" name="email" type="email" placeholder="you@example.com">
+
+      <button class="btn" type="submit">Create account</button>
+      <p class="form-msg" id="formMsg"></p>
+    </form>
+  </section>
+
+  <section class="faq">
+    <h2>Questions</h2>
+    <details>
+      <summary>Do I have to pay anything to join?</summary>
+      <p>No. Registration is free and there is no activation fee. Anyone charging a fee to "activate" an account is not affiliated with us.</p>
+    </details>
+    <details>
+      <summary>How much can I realistically earn?</summary>
+      <p>Rates are per task and shown upfront. Most users earn modest amounts — this is supplementary income, not a salary. We never promise fixed daily earnings.</p>
+    </details>
+    <details>
+      <summary>When do I get paid?</summary>
+      <p>Approved tasks are paid to your M-PESA number within 3 working days of approval.</p>
+    </details>
+    <details>
+      <summary>Why do reviews get rejected?</summary>
+      <p>Fake, copied, or low-effort reviews are rejected. We only pay for honest, genuine submissions.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <p>SwiftTask &copy; <span id="year"></span> — This is a demo template. Replace with your registered business details before going live.</p>
+  <p style="margin-top:8px">Terms · Privacy · Contact</p>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const form = document.getElementById('signupForm');
+  const msg  = document.getElementById('formMsg');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name  = form.name.value.trim();
+    const phone = form.phone.value.trim();
+
+    // Basic Kenyan phone validation: 07XXXXXXXX, 01XXXXXXXX, or +2547...
+    const phoneOk = /^(?:\+254|0)(7|1)\d{8}$/.test(phone.replace(/\s/g, ''));
+
+    if (name.length < 2) {
+      msg.className = 'form-msg err';
+      msg.textContent = 'Please enter your full name.';
+      return;
+    }
+    if (!phoneOk) {
+      msg.className = 'form-msg err';
+      msg.textContent = 'Please enter a valid Kenyan phone number (e.g. 0712345678).';
+      return;
+    }
+
+    // Demo only — replace with a real POST to your backend / API
+    msg.className = 'form-msg ok';
+    msg.textContent = 'Thanks, ' + name.split(' ')[0] + '! Your account request was received. (Demo — connect a backend to save it.)';
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
